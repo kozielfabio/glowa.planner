@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GLOWA, Planner Notion · Sua melhor versão em 21 dias</title>
+<meta name="description" content="GLOWA: o planner Notion prático para transformar sua rotina, autoestima e confiança. Glow up completo de dentro para fora.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Great+Vibes&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink-soft: #F8E8EE;
+    --pink: #E8A0B5;
+    --pink-mid: #D47A96;
+    --pink-deep: #B85C78;
+    --blush: #FDF2F5;
+    --cream: #FFF9F7;
+    --white: #FFFFFF;
+    --ink: #2A1F24;
+    --ink-soft: #5C4A52;
+    --ink-muted: #8A7880;
+    --stripe: #F3D6E0;
+    --gold: #C9A87C;
+    --border-soft: rgba(184, 92, 120, 0.22);
+    --ease: cubic-bezier(.16, 1, .3, 1);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; max-width: 100%; overflow-x: hidden; }
+  body {
+    font-family: "Manrope", -apple-system, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    max-width: 100%;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  section { position: relative; padding-block: clamp(64px, 8vw, 110px); overflow: hidden; }
+  .wrap { max-width: 1060px; margin-inline: auto; padding-inline: clamp(20px, 5vw, 48px); position: relative; z-index: 2; }
+
+  .stripes {
+    background-color: var(--blush);
+    background-image: repeating-linear-gradient(90deg, transparent, transparent 28px, var(--stripe) 28px, var(--stripe) 56px);
+  }
+
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--pink-deep);
+  }
+  .section-title {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 600;
+    font-size: clamp(1.9rem, 4vw, 2.85rem);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  .section-title em { font-style: italic; color: var(--pink-deep); }
+  p.lede {
+    max-width: 520px;
+    color: var(--ink-soft);
+    font-size: 15.5px;
+    line-height: 1.7;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 52px;
+    padding: 0 28px;
+    background: linear-gradient(180deg, var(--pink-mid), var(--pink-deep));
+    color: #fff;
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 999px;
+    box-shadow: 0 10px 28px rgba(184, 92, 120, 0.28);
+    transition: transform 0.3s var(--ease), box-shadow 0.3s ease, background 0.3s ease;
+    cursor: pointer;
+  }
+  .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 36px rgba(184, 92, 120, 0.38);
+    background: linear-gradient(180deg, var(--pink), var(--pink-mid));
+  }
+  .section-cta { display: flex; justify-content: center; margin-top: 40px; }
+  @media (max-width: 640px) {
+    .btn { width: 100%; font-size: 11.5px; padding: 0 18px; }
+    .section-cta { width: 100%; }
+  }
+
+  /* NAV */
+  .navbar {
+    position: fixed; inset-inline: 0; top: 0; z-index: 50;
+    background: transparent;
+    transition: background 0.35s ease, box-shadow 0.35s ease;
+  }
+  .navbar.scrolled {
+    background: rgba(255, 249, 247, 0.94);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 1px 0 var(--border-soft);
+  }
+  .navbar__inner {
+    max-width: 1060px; margin-inline: auto;
+    padding: 16px clamp(20px, 5vw, 48px);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .navbar__brand {
+    font-family: "Great Vibes", cursive;
+    font-size: 28px;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .navbar__links { display: flex; align-items: center; gap: 26px; list-style: none; }
+  .navbar__links a {
+    font-size: 11.5px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink-soft);
+    transition: color 0.25s ease;
+  }
+  .navbar__links a:hover { color: var(--pink-deep); }
+  .navbar__cta {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    color: #fff; background: var(--pink-deep);
+    padding: 10px 18px; border-radius: 999px;
+    transition: background 0.25s ease, transform 0.25s ease;
+  }
+  .navbar__cta:hover { background: var(--pink-mid); transform: translateY(-1px); }
+  .navbar__toggle {
+    display: none; flex-direction: column; gap: 5px;
+    width: 40px; height: 40px; align-items: center; justify-content: center;
+    background: transparent; border: 1px solid var(--border-soft); border-radius: 999px; cursor: pointer;
+  }
+  .navbar__toggle span { display: block; width: 16px; height: 1.5px; background: var(--ink); }
+  .mobile-menu {
+    position: fixed; inset: 0; z-index: 60; background: var(--blush);
+    display: flex; flex-direction: column;
+    padding: 20px clamp(20px, 5vw, 48px) 40px;
+    opacity: 0; visibility: hidden; transform: translateY(-10px);
+    transition: opacity 0.35s var(--ease), transform 0.35s var(--ease), visibility 0s linear 0.35s;
+  }
+  .mobile-menu.is-open {
+    opacity: 1; visibility: visible; transform: translateY(0);
+    transition: opacity 0.35s var(--ease), transform 0.35s var(--ease), visibility 0s;
+  }
+  .mobile-menu__head { display: flex; align-items: center; justify-content: space-between; }
+  .mobile-menu__brand { font-family: "Great Vibes", cursive; font-size: 26px; color: var(--ink); }
+  .mobile-menu__close {
+    width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
+    border: 1px solid var(--border-soft); border-radius: 999px; background: transparent; cursor: pointer;
+  }
+  .mobile-menu__links { list-style: none; margin-block: auto; display: flex; flex-direction: column; gap: 4px; }
+  .mobile-menu__links a {
+    display: block; padding: 14px 0;
+    font-size: clamp(1.3rem, 5vw, 1.6rem); font-weight: 600;
+    color: var(--ink); border-bottom: 1px solid var(--border-soft);
+  }
+  .mobile-menu__cta { margin-top: 24px; width: 100%; }
+  @media (max-width: 900px) {
+    .navbar__links, .navbar__cta { display: none; }
+    .navbar__toggle { display: flex; }
+  }
+  @media (min-width: 901px) { .mobile-menu { display: none; } }
+
+  /* HERO */
+  .hero {
+    min-height: 92svh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 120px 0 80px;
+    text-align: center;
+  }
+  .hero-content { max-width: 720px; margin-inline: auto; }
+  .hero-star {
+    font-size: 18px;
+    color: var(--pink-deep);
+    margin-bottom: 16px;
+    opacity: 0.85;
+  }
+  .hero-product {
+    font-family: "Great Vibes", cursive;
+    font-size: clamp(3.8rem, 12vw, 6.8rem);
+    line-height: 0.95;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .hero-product span { color: var(--pink-deep); }
+  .hero-tag {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--pink-deep);
+    margin-bottom: 22px;
+  }
+  .hero-title {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 500;
+    font-size: clamp(1.55rem, 3.4vw, 2.35rem);
+    line-height: 1.3;
+    color: var(--ink);
+    max-width: 620px;
+    margin-inline: auto;
+  }
+  .hero-title em { font-style: italic; color: var(--pink-deep); }
+  .hero-desc {
+    max-width: 460px;
+    margin: 18px auto 0;
+    font-size: 15.5px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+  }
+  .hero-cta { margin-top: 32px; }
+
+  /* VOCÊ VAI TER */
+  .vai-ter { background: var(--white); }
+  .vai-ter__head { text-align: center; margin-bottom: 40px; }
+  .vai-ter__head .section-title { margin: 10px auto 0; max-width: 560px; }
+  .vai-ter-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 640px) { .vai-ter-grid { grid-template-columns: 1fr; } }
+  .vai-ter-card {
+    background: var(--blush);
+    border: 1px solid var(--border-soft);
+    border-radius: 14px;
+    padding: 24px 22px;
+    transition: transform 0.3s var(--ease);
+  }
+  .vai-ter-card:hover { transform: translateY(-3px); }
+  .vai-ter-card__icon { font-size: 20px; margin-bottom: 10px; color: var(--pink-deep); }
+  .vai-ter-card__title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .vai-ter-card__text {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+  }
+
+  /* PROBLEMA */
+  .problem { background: var(--blush); }
+  .problem__head { text-align: center; margin-bottom: 36px; }
+  .problem__head .section-title { max-width: 600px; margin-inline: auto; }
+  .problem-lines { max-width: 640px; margin-inline: auto; }
+  .problem-line {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 12px;
+    padding-block: 20px;
+    border-top: 1px solid var(--border-soft);
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+  }
+  .problem-lines > .problem-line:last-child { border-bottom: 1px solid var(--border-soft); }
+  .problem-line__num { color: var(--pink-deep); font-weight: 700; font-size: 13px; }
+
+  /* O QUE TEM DENTRO */
+  .dentro { background: var(--white); }
+  .dentro__head { text-align: center; margin-bottom: 40px; }
+  .dentro__head .section-title { margin: 10px auto 0; max-width: 560px; }
+  .dentro-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  @media (max-width: 860px) { .dentro-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px) { .dentro-grid { grid-template-columns: 1fr; } }
+  .dentro-card {
+    background: var(--blush);
+    border: 1px solid var(--border-soft);
+    border-radius: 12px;
+    padding: 20px 18px;
+  }
+  .dentro-card__cat {
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--pink-deep);
+    margin-bottom: 8px;
+  }
+  .dentro-card__title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .dentro-card ul {
+    list-style: none;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+  }
+  .dentro-card li {
+    padding: 2px 0 2px 12px;
+    position: relative;
+  }
+  .dentro-card li::before {
+    content: "♥";
+    position: absolute;
+    left: 0;
+    font-size: 8px;
+    color: var(--pink-mid);
+    top: 5px;
+  }
+
+  /* PARA QUEM */
+  .para-quem { background: var(--blush); }
+  .para-quem__head { text-align: center; margin-bottom: 36px; }
+  .para-quem__head .section-title { margin: 10px auto 0; max-width: 540px; }
+  .para-quem-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    max-width: 780px;
+    margin-inline: auto;
+  }
+  @media (max-width: 600px) { .para-quem-grid { grid-template-columns: 1fr; } }
+  .para-quem-card {
+    background: var(--white);
+    border: 1px solid var(--border-soft);
+    border-radius: 12px;
+    padding: 22px 20px;
+  }
+  .para-quem-card__title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .para-quem-card__text {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+  }
+
+  /* OFERTA */
+  .offer { background: var(--white); }
+  .offer__inner { max-width: 500px; margin-inline: auto; text-align: center; }
+  .offer__badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 7px 14px;
+    background: var(--pink-soft);
+    border: 1px solid var(--border-soft);
+    border-radius: 999px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--pink-deep);
+    margin-bottom: 16px;
+  }
+  .offer__price-block {
+    margin-top: 28px;
+    background: var(--blush);
+    border: 1px solid var(--border-soft);
+    border-radius: 16px;
+    padding: 32px 24px;
+    box-shadow: 0 14px 40px rgba(42, 31, 36, 0.05);
+  }
+  .offer__from {
+    font-size: 13px;
+    color: var(--ink-muted);
+    text-decoration: line-through;
+    margin-bottom: 4px;
+  }
+  .offer__price {
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(2.5rem, 6vw, 3.3rem);
+    font-weight: 600;
+    color: var(--pink-deep);
+    line-height: 1;
+  }
+  .offer__price span { font-size: 0.42em; vertical-align: super; }
+  .offer__installments {
+    margin-top: 6px;
+    font-size: 14px;
+    color: var(--ink-soft);
+  }
+  .offer__urgency {
+    margin-top: 12px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--pink-deep);
+  }
+  .offer__list {
+    margin: 22px auto 0;
+    max-width: 360px;
+    text-align: left;
+    list-style: none;
+  }
+  .offer__list li {
+    display: flex; gap: 10px; align-items: flex-start;
+    padding: 8px 0;
+    font-size: 14px;
+    color: var(--ink-soft);
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .offer__list li:last-child { border-bottom: none; }
+  .offer__list li::before {
+    content: "♥";
+    color: var(--pink-mid);
+    font-size: 11px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .offer-bonuses {
+    margin-top: 24px;
+    text-align: left;
+    border-top: 1px dashed var(--border-soft);
+    padding-top: 18px;
+  }
+  .offer-bonuses h4 {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--ink);
+  }
+  .offer-bonuses ul { list-style: none; font-size: 13.5px; color: var(--ink-soft); }
+  .offer-bonuses li {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 5px 0;
+    border-bottom: 1px dashed var(--border-soft);
+  }
+  .offer-bonuses li span:last-child {
+    color: var(--gold);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  /* GARANTIA */
+  .guarantee { background: var(--blush); }
+  .guarantee__grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 40px;
+    align-items: center;
+  }
+  .guarantee__copy .section-title { margin: 10px 0 0; }
+  .guarantee__copy .section-title span { color: var(--pink-deep); }
+  .guarantee__text {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 480px;
+  }
+  .guarantee__text p {
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+  }
+  .guarantee__cta { margin-top: 22px; }
+  .guarantee__stat {
+    text-align: center;
+    background: var(--white);
+    border: 1px solid var(--border-soft);
+    border-radius: 16px;
+    padding: 36px 22px;
+  }
+  .guarantee__stat-number {
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(4rem, 8vw, 6rem);
+    font-weight: 600;
+    line-height: 0.9;
+    color: var(--pink-deep);
+  }
+  .guarantee__stat-label {
+    margin-top: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  .guarantee__stat-note {
+    margin: 12px auto 0;
+    max-width: 200px;
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+  }
+  @media (max-width: 860px) {
+    .guarantee__grid { grid-template-columns: 1fr; gap: 32px; }
+    .guarantee__stat { order: -1; }
+  }
+
+  /* FAQ */
+  .faq { background: var(--white); }
+  .faq__head { max-width: 540px; margin-inline: auto; text-align: center; }
+  .faq__head .section-title { margin: 10px auto 0; }
+  .faq__head .section-title span { color: var(--pink-deep); }
+  .faq-list {
+    max-width: 740px;
+    margin: 40px auto 0;
+    border-top: 1px solid var(--border-soft);
+  }
+  .faq-item { border-bottom: 1px solid var(--border-soft); }
+  .faq-item__trigger {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 32px 1fr 22px;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 4px;
+    background: none; border: none; margin: 0;
+    font-family: inherit; text-align: left; color: inherit;
+    cursor: pointer;
+  }
+  .faq-item__num { font-size: 12px; font-weight: 700; color: var(--pink-deep); }
+  .faq-item__question { font-size: 15px; font-weight: 600; line-height: 1.4; color: var(--ink); }
+  .faq-item__icon {
+    font-size: 18px; font-weight: 300; color: var(--pink-mid);
+    text-align: center; transition: transform 0.35s var(--ease);
+  }
+  .faq-item.is-open .faq-item__icon { transform: rotate(45deg); }
+  .faq-item__panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.4s var(--ease); }
+  .faq-item.is-open .faq-item__panel { grid-template-rows: 1fr; }
+  .faq-item__panel-inner { overflow: hidden; }
+  .faq-item__answer {
+    max-width: 600px;
+    padding: 0 20px 20px calc(32px + 12px);
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .faq-item.is-open .faq-item__answer { opacity: 1; transition: opacity 0.35s ease 0.1s; }
+  @media (max-width: 600px) {
+    .faq-item__trigger { grid-template-columns: 26px 1fr 20px; gap: 8px; }
+    .faq-item__question { font-size: 14px; }
+    .faq-item__answer { padding-left: calc(26px + 8px); }
+  }
+
+  /* CTA FINAL */
+  .cta-final { background: var(--blush); text-align: center; }
+  .cta-final .section-title { max-width: 540px; margin-inline: auto; }
+  .cta-final .section-title span { color: var(--pink-deep); }
+  .cta-final .lede { margin: 12px auto 0; text-align: center; }
+  .cta-final__cta { margin-top: 28px; }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink);
+    color: rgba(255,255,255,0.7);
+    padding-block: 28px;
+  }
+  footer .wrap {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    gap: 12px; font-size: 12px;
+  }
+  footer a { color: rgba(255,255,255,0.7); }
+  footer a:hover { color: #fff; }
+  footer nav { display: flex; gap: 20px; }
+
+  /* REVEAL */
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.75s var(--ease), transform 0.75s var(--ease);
+  }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* ===== POLISH ===== */
+  :root {
+    --ease-soft: cubic-bezier(.22, 1, .36, 1);
+    --shadow-sm: 0 1px 2px rgba(42,31,36,.04), 0 10px 28px rgba(184,92,120,.08);
+    --shadow-md: 0 2px 6px rgba(42,31,36,.04), 0 22px 50px rgba(184,92,120,.18);
+  }
+  html { scroll-padding-top: 84px; }
+  body { text-rendering: optimizeLegibility; }
+  ::selection { background: var(--pink); color: #fff; }
+  p { text-wrap: pretty; }
+  section { padding-block: clamp(72px, 9vw, 124px); }
+  :focus-visible { outline: 2px solid var(--pink-deep); outline-offset: 3px; border-radius: 6px; }
+
+  .reveal {
+    transform: translateY(26px);
+    transition: opacity 1s var(--ease-soft), transform 1s var(--ease-soft);
+  }
+
+  /* hero */
+  .stripes { background-image: repeating-linear-gradient(90deg, transparent 0 28px, rgba(243,214,224,.7) 28px 56px); }
+  .hero { position: relative; isolation: isolate; overflow: clip; }
+  .hero::before {
+    content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(60% 55% at 50% 42%, var(--cream) 0%, rgba(255,249,247,.88) 45%, rgba(253,242,245,0) 100%),
+      radial-gradient(40% 40% at 10% 88%, rgba(232,160,181,.38), transparent 70%),
+      radial-gradient(34% 34% at 92% 8%, rgba(201,168,124,.24), transparent 70%);
+  }
+  .hero::after {
+    content: ""; position: absolute; inset: auto 0 0; height: 140px; z-index: 1; pointer-events: none;
+    background: linear-gradient(to bottom, transparent, var(--white));
+  }
+  .hero-star { display: inline-block; animation: twinkle 4.5s ease-in-out infinite; }
+  @keyframes twinkle {
+    0%, 100% { scale: 1; rotate: 0deg; }
+    50% { scale: 1.25; rotate: 45deg; }
+  }
+  .hero-product { text-shadow: 0 6px 30px rgba(212,122,150,.25); }
+
+  /* botões */
+  .btn {
+    position: relative; overflow: hidden; isolation: isolate;
+    transition: transform .5s var(--ease-soft), box-shadow .5s var(--ease-soft), filter .3s ease;
+  }
+  .btn::after {
+    content: ""; position: absolute; inset: 0; z-index: -1;
+    background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,.38) 50%, transparent 70%);
+    transform: translateX(-120%); transition: transform .9s var(--ease-soft);
+  }
+  .btn:hover {
+    background: linear-gradient(180deg, var(--pink-mid), var(--pink-deep));
+    filter: brightness(1.06);
+  }
+  .btn:hover::after { transform: translateX(120%); }
+  .btn:active { transform: translateY(0) scale(.98); }
+  .navbar__cta { transition: background .3s ease, transform .4s var(--ease-soft), box-shadow .4s ease; }
+  .navbar__cta:hover { box-shadow: 0 8px 20px rgba(184,92,120,.3); }
+  .navbar__links a { position: relative; }
+  .navbar__links a::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 1.5px;
+    background: var(--pink-deep); transform: scaleX(0); transform-origin: left;
+    transition: transform .4s var(--ease-soft);
+  }
+  .navbar__links a:hover::after { transform: scaleX(1); }
+
+  /* cards */
+  .vai-ter-card, .dentro-card, .para-quem-card {
+    border-radius: 20px;
+    box-shadow: var(--shadow-sm);
+    transition: opacity 1s var(--ease-soft), transform .5s var(--ease-soft), box-shadow .5s var(--ease-soft), border-color .4s ease;
+  }
+  .vai-ter-card:hover, .dentro-card:hover, .para-quem-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(184,92,120,.4);
+  }
+  .vai-ter-card { padding: 28px 26px; }
+  .vai-ter-card__icon {
+    width: 42px; height: 42px; display: grid; place-items: center;
+    background: #fff; border-radius: 50%; box-shadow: var(--shadow-sm); margin-bottom: 14px;
+  }
+  .dentro-card { padding: 26px 22px; }
+  .dentro-card__title { font-size: 1.35rem; margin-bottom: 14px; }
+  .dentro-card ul { display: flex; flex-wrap: wrap; gap: 7px; }
+  .dentro-card li {
+    padding: 5px 12px; font-size: 12.5px; line-height: 1.35;
+    background: #fff; border: 1px solid var(--border-soft); border-radius: 999px;
+    transition: background .3s ease, color .3s ease, border-color .3s ease;
+  }
+  .dentro-card li::before { display: none; }
+  .dentro-card li:hover { background: var(--pink-soft); color: var(--pink-deep); border-color: var(--pink); }
+  .para-quem-card { padding: 26px 24px; }
+
+  /* problema */
+  .problem-line { padding-block: 24px; align-items: baseline; }
+  .problem-line__num {
+    width: 30px; height: 30px; display: grid; place-items: center;
+    background: #fff; border-radius: 50%; box-shadow: var(--shadow-sm);
+  }
+  .problem-lines > .problem-line:last-child {
+    margin-top: 16px; padding: 24px 22px; background: #fff; color: var(--ink);
+    border: 1px solid var(--border-soft); border-radius: 20px; box-shadow: var(--shadow-sm);
+  }
+
+  /* oferta */
+  .offer__inner { max-width: 540px; }
+  .offer__price-block {
+    background: linear-gradient(180deg, #fff 0%, var(--blush) 100%);
+    border-radius: 28px; padding: 38px 28px; box-shadow: var(--shadow-md);
+  }
+  .offer__list { margin-top: 0; }
+  .offer-bonuses { margin-top: 26px; padding-top: 22px; }
+  .offer-bonuses__total {
+    margin-top: 6px; padding-top: 12px !important; border-bottom: none !important;
+    font-weight: 700; color: var(--ink);
+  }
+  .offer-bonuses li.offer-bonuses__total span:last-child {
+    color: var(--ink-muted); text-decoration: line-through; font-size: 15px;
+  }
+  .offer__pricebox {
+    margin-top: 22px; padding: 26px 16px 22px; background: #fff; border-radius: 22px;
+    border: 1px solid var(--border-soft); box-shadow: inset 0 0 0 5px var(--pink-soft);
+  }
+  .offer__from { text-decoration: none; font-size: 14px; }
+  .offer__from s { text-decoration-thickness: 1.5px; }
+  .offer__price { font-size: clamp(3.6rem, 10vw, 5rem); margin-top: 6px; }
+  .offer__price span { margin-right: 4px; }
+  .offer__installments { margin-top: 10px; }
+  .offer__save {
+    display: inline-block; margin-top: 14px; padding: 6px 14px;
+    background: var(--pink-soft); color: var(--pink-deep); border-radius: 999px;
+    font-size: 12px; font-weight: 700; letter-spacing: .04em;
+  }
+
+  /* garantia */
+  .guarantee__stat { border-radius: 28px; box-shadow: var(--shadow-md); }
+  .guarantee__stat-number {
+    background: linear-gradient(180deg, var(--pink-mid), var(--pink-deep));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+
+  /* faq */
+  .faq-item__trigger { padding-block: 22px; transition: color .3s ease; }
+  .faq-item__trigger:hover .faq-item__question { color: var(--pink-deep); }
+  .faq-item__question { transition: color .3s ease; }
+  .faq-item__panel { transition: grid-template-rows .55s var(--ease-soft); }
+
+  /* ===== MOBILE FIX ===== */
+  html, body { overflow-x: clip; }
+  section { overflow: clip; }
+  .btn { text-align: center; line-height: 1.25; padding-block: 14px; }
+  @media (max-width: 640px) {
+    section { padding-block: 56px; }
+    .hero { min-height: 100svh; padding: 96px 0 64px; }
+    .hero-desc { font-size: 15px; }
+    .section-title { font-size: clamp(1.7rem, 7.4vw, 2.1rem); }
+    .vai-ter__head, .dentro__head, .para-quem__head, .problem__head { margin-bottom: 26px; }
+
+    /* carrosséis deslizáveis no lugar das listas longas */
+    .vai-ter-grid, .dentro-grid, .para-quem-grid {
+      display: grid; grid-auto-flow: column; grid-template-columns: none;
+      grid-auto-columns: 82%; gap: 12px;
+      overflow-x: auto; overscroll-behavior-x: contain;
+      scroll-snap-type: x mandatory; scrollbar-width: none;
+      margin-inline: calc(-1 * clamp(20px, 5vw, 48px));
+      padding: 6px clamp(20px, 5vw, 48px) 22px;
+      scroll-padding-inline: clamp(20px, 5vw, 48px);
+      -webkit-overflow-scrolling: touch;
+    }
+    .vai-ter-grid::-webkit-scrollbar, .dentro-grid::-webkit-scrollbar, .para-quem-grid::-webkit-scrollbar { display: none; }
+    .vai-ter-card, .dentro-card, .para-quem-card {
+      scroll-snap-align: start; min-width: 0;
+      opacity: 1 !important; transform: none !important; transition-delay: 0s !important;
+    }
+    .vai-ter-card { padding: 22px 20px; }
+    .vai-ter-card__icon { width: 36px; height: 36px; margin-bottom: 10px; }
+    .dentro-card { padding: 22px 18px; }
+    .para-quem-card { padding: 22px 20px; }
+    .para-quem-card__title { font-size: 1.15rem; }
+
+    /* problema mais enxuto */
+    .problem-line { padding-block: 16px; font-size: 14.5px; }
+    .problem-lines > .problem-line:last-child { padding: 18px 16px; }
+    .section-cta { margin-top: 28px; }
+
+    /* oferta: sem lista duplicada */
+    .offer__list { display: none; }
+    .offer__price-block { padding: 26px 16px; border-radius: 22px; }
+    .offer-bonuses { margin-top: 0; padding-top: 0; border-top: none; }
+    .offer__pricebox { padding: 22px 12px 18px; }
+    .offer__price { font-size: clamp(3.2rem, 17vw, 4.2rem); }
+
+    .guarantee__stat { padding: 26px 18px; }
+    .faq-list { margin-top: 28px; }
+    .faq-item__trigger { padding-block: 16px; }
+    footer .wrap { justify-content: center; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+  <div class="navbar__inner">
+    <a href="#" class="navbar__brand">Glowa</a>
+    <ul class="navbar__links">
+      <li><a href="#vai-ter">Benefícios</a></li>
+      <li><a href="#dentro">Conteúdo</a></li>
+      <li><a href="#oferta">Oferta</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a href="https://pay.cakto.com.br/3agqktb_1221057" class="navbar__cta">ACESSAR O PLANNER</a>
+    <button class="navbar__toggle" id="navToggle" type="button" aria-label="Abrir menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <div class="mobile-menu__head">
+    <span class="mobile-menu__brand">Glowa</span>
+    <button class="mobile-menu__close" id="mobileMenuClose" type="button" aria-label="Fechar menu">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 5l14 14M19 5L5 19"/></svg>
+    </button>
+  </div>
+  <ul class="mobile-menu__links">
+    <li><a href="#vai-ter">Benefícios</a></li>
+    <li><a href="#dentro">Conteúdo</a></li>
+    <li><a href="#oferta">Oferta</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <a href="https://pay.cakto.com.br/3agqktb_1221057" class="btn mobile-menu__cta">ACESSAR O PLANNER</a>
+</div>
+
+<!-- HERO -->
+<header class="hero stripes">
+  <div class="hero-content wrap">
+    <div class="hero-star reveal">✦</div>
+    <div class="hero-product reveal">Glow<span>a</span></div>
+    <div class="hero-tag reveal">Planner Notion</div>
+    <h1 class="hero-title reveal">
+      Descubra a sua <em>melhor versão</em><br>
+      e volte irreconhecível em 21 dias
+    </h1>
+    <p class="hero-desc reveal">
+      O planner prático no Notion para transformar sua rotina, sua autoestima e sua confiança, tudo em um só lugar.
+    </p>
+    <div class="hero-cta reveal">
+      <a href="https://pay.cakto.com.br/3agqktb_1221057" class="btn">ACESSE O DESAFIO ✦</a>
+    </div>
+  </div>
+</header>
+
+<!-- COM O GLOWA VOCÊ VAI TER -->
+<section class="vai-ter" id="vai-ter">
+  <div class="wrap">
+    <div class="vai-ter__head">
+      <div class="eyebrow reveal">Com o GLOWA você vai ter</div>
+      <h2 class="section-title reveal">Tudo organizado para o seu glow up.</h2>
+    </div>
+    <div class="vai-ter-grid">
+      <div class="vai-ter-card reveal">
+        <div class="vai-ter-card__icon">✦</div>
+        <div class="vai-ter-card__title">Estratégias validadas</div>
+        <p class="vai-ter-card__text">Para uma rotina sem complicações. Serve para todas as rotinas.</p>
+      </div>
+      <div class="vai-ter-card reveal">
+        <div class="vai-ter-card__icon">✦</div>
+        <div class="vai-ter-card__title">Ferramentas práticas</div>
+        <p class="vai-ter-card__text">Para organizar sua rotina de estudos, tarefas e metas pessoais.</p>
+      </div>
+      <div class="vai-ter-card reveal">
+        <div class="vai-ter-card__icon">✦</div>
+        <div class="vai-ter-card__title">Dicas de autocuidado</div>
+        <p class="vai-ter-card__text">Guias para manter o equilíbrio emocional e mental no dia a dia.</p>
+      </div>
+      <div class="vai-ter-card reveal">
+        <div class="vai-ter-card__icon">✦</div>
+        <div class="vai-ter-card__title">Inspiração diária</div>
+        <p class="vai-ter-card__text">Para te motivar a seguir seus objetivos e cuidar de si mesma com carinho.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEMA -->
+<section class="problem">
+  <div class="wrap">
+    <div class="problem__head">
+      <h2 class="section-title reveal">Você sente que sua rotina está desorganizada?</h2>
+    </div>
+    <div class="problem-lines">
+      <div class="problem-line reveal">
+        <span class="problem-line__num">01</span>
+        <span>Tarefas acumuladas, metas esquecidas e a sensação constante de que está sempre correndo atrás do tempo.</span>
+      </div>
+      <div class="problem-line reveal">
+        <span class="problem-line__num">02</span>
+        <span>Você tenta usar agendas, aplicativos ou listas, mas acaba deixando tudo de lado depois de alguns dias.</span>
+      </div>
+      <div class="problem-line reveal">
+        <span class="problem-line__num">03</span>
+        <span>Não por falta de esforço. É difícil manter a organização quando tudo está em lugares diferentes.</span>
+      </div>
+      <div class="problem-line reveal">
+        <span class="problem-line__num">04</span>
+        <span>O GLOWA foi criado justamente para isso. Um espaço completo no Notion para organizar sua rotina, acompanhar objetivos, planejar estudos, finanças, hábitos e construir a sua melhor versão, tudo em um só lugar.</span>
+      </div>
+    </div>
+    <div class="section-cta reveal">
+      <a href="https://pay.cakto.com.br/3agqktb_1221057" class="btn">QUERO ORGANIZAR MINHA VIDA →</a>
+    </div>
+  </div>
+</section>
+
+<!-- O QUE TEM DENTRO -->
+<section class="dentro" id="dentro">
+  <div class="wrap">
+    <div class="dentro__head">
+      <div class="eyebrow reveal">O que você encontra dentro do planner</div>
+      <h2 class="section-title reveal">Tudo em um só lugar no Notion.</h2>
+    </div>
+    <div class="dentro-grid">
+      <div class="dentro-card reveal">
+        <div class="dentro-card__cat">Saúde</div>
+        <div class="dentro-card__title">Corpo & energia</div>
+        <ul>
+          <li>Rotina alimentar</li>
+          <li>Mercado</li>
+          <li>Treino</li>
+        </ul>
+      </div>
+      <div class="dentro-card reveal">
+        <div class="dentro-card__cat">Organização</div>
+        <div class="dentro-card__title">Rotina que funciona</div>
+        <ul>
+          <li>Rotina diária</li>
+          <li>Como se organizar</li>
+          <li>Como ter disciplina</li>
+          <li>Reset semanal</li>
+          <li>Metas 2026</li>
+        </ul>
+      </div>
+      <div class="dentro-card reveal">
+        <div class="dentro-card__cat">Autocuidado</div>
+        <div class="dentro-card__title">Pele, cabelo & carinho</div>
+        <ul>
+          <li>Tipo de pele</li>
+          <li>Sequência dos produtos</li>
+          <li>Produtos de skincare</li>
+          <li>Banho premium</li>
+          <li>Cronograma capilar</li>
+          <li>Produtos para cabelos</li>
+          <li>Lista de comprinhas</li>
+          <li>Glow Up List</li>
+          <li>Checklist passo a passo</li>
+          <li>Autocuidado geral</li>
+          <li>Autoconhecimento e amor próprio</li>
+        </ul>
+      </div>
+      <div class="dentro-card reveal">
+        <div class="dentro-card__cat">Finanças</div>
+        <div class="dentro-card__title">Dinheiro com consciência</div>
+        <ul>
+          <li>Controle de ganhos</li>
+          <li>Controle de gastos</li>
+          <li>Método 50/30/20</li>
+          <li>Regras para não ser consumista</li>
+          <li>Como ganhar dinheiro pela internet</li>
+        </ul>
+      </div>
+      <div class="dentro-card reveal">
+        <div class="dentro-card__cat">Estudos</div>
+        <div class="dentro-card__title">Foco & produtividade</div>
+        <ul>
+          <li>Métodos de estudos</li>
+          <li>Livro PDF</li>
+          <li>Hábitos e boas práticas</li>
+          <li>Planner de estudos</li>
+          <li>Playlist de estudos</li>
+        </ul>
+      </div>
+      <div class="dentro-card reveal">
+        <div class="dentro-card__cat">Manifestação</div>
+        <div class="dentro-card__title">Mente & espiritualidade</div>
+        <ul>
+          <li>Como praticar</li>
+          <li>Métodos</li>
+          <li>Playlist de manifestação</li>
+          <li>Devocional</li>
+          <li>Gratidão do dia</li>
+          <li>Momento de oração</li>
+          <li>Leitura da Bíblia</li>
+        </ul>
+      </div>
+    </div>
+    <div class="section-cta reveal">
+      <a href="https://pay.cakto.com.br/3agqktb_1221057" class="btn">QUERO ESSE PLANNER →</a>
+    </div>
+  </div>
+</section>
+
+<!-- PARA QUEM É -->
+<section class="para-quem">
+  <div class="wrap">
+    <div class="para-quem__head">
+      <div class="eyebrow reveal">O Planner GLOWA é para você que</div>
+      <h2 class="section-title reveal">Quer viver a sua melhor versão.</h2>
+    </div>
+    <div class="para-quem-grid">
+      <div class="para-quem-card reveal">
+        <div class="para-quem-card__title">Deseja transformar autoestima e confiança</div>
+        <p class="para-quem-card__text">Mas não sabe por onde começar de verdade.</p>
+      </div>
+      <div class="para-quem-card reveal">
+        <div class="para-quem-card__title">Se sente cansada e sobrecarregada</div>
+        <p class="para-quem-card__text">E precisa dedicar um tempo a si mesma.</p>
+      </div>
+      <div class="para-quem-card reveal">
+        <div class="para-quem-card__title">Precisa de um passo a passo leve</div>
+        <p class="para-quem-card__text">E eficaz que te guie para um glow up completo de dentro para fora.</p>
+      </div>
+      <div class="para-quem-card reveal">
+        <div class="para-quem-card__title">Quer criar uma rotina com hábitos saudáveis</div>
+        <p class="para-quem-card__text">Mas não consegue manter a constância por causa da procrastinação.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OFERTA -->
+<section class="offer" id="oferta">
+  <div class="wrap">
+    <div class="offer__inner">
+      <div class="offer__badge reveal">✦ Oferta especial</div>
+      <h2 class="section-title reveal">O Planner GLOWA completo + bônus</h2>
+      <p class="lede reveal" style="margin:12px auto 0;text-align:center;">
+        Tudo que você precisa para organizar a vida e começar o seu glow up agora.
+      </p>
+      <div class="offer__price-block reveal">
+        <ul class="offer__list">
+          <li>Planner Notion GLOWA completo</li>
+          <li>Desafio 21 Dias Glow Up</li>
+          <li>Guia My Glow Up (e-book)</li>
+          <li>E-book de Receitas Saudáveis</li>
+          <li>Comunidade VIP no Telegram</li>
+          <li>Habit Tracker + checklists</li>
+        </ul>
+        <div class="offer-bonuses">
+          <h4>Valor de cada item</h4>
+          <ul>
+            <li><span>Planner Notion GLOWA</span><span>R$ 87,00</span></li>
+            <li><span>Comunidade VIP</span><span>R$ 19,90</span></li>
+            <li><span>Guia My Glow Up</span><span>R$ 49,90</span></li>
+            <li><span>E-book Receitas Saudáveis</span><span>R$ 39,90</span></li>
+            <li><span>Desafio 21 Dias Glow Up</span><span>R$ 37,00</span></li>
+            <li class="offer-bonuses__total"><span>Valor total</span><span>R$ 233,70</span></li>
+          </ul>
+        </div>
+        <div class="offer__pricebox">
+          <div class="offer__from">De <s>R$ 233,70</s> por apenas</div>
+          <div class="offer__price"><span>R$</span>47,00</div>
+          <div class="offer__installments">ou 12x de R$ 4,86</div>
+          <div class="offer__save">Você economiza R$ 186,70</div>
+          <div class="offer__urgency">⏰ Acesso imediato após a compra</div>
+        </div>
+        <div style="margin-top:26px;">
+          <a href="https://pay.cakto.com.br/3agqktb_1221057" class="btn" style="width:100%;">QUERO ACESSAR AGORA 🔥</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GARANTIA -->
+<section class="guarantee" id="garantia">
+  <div class="wrap guarantee__grid">
+    <div class="guarantee__copy">
+      <div class="eyebrow reveal">Garantia GLOWA</div>
+      <h2 class="section-title reveal">Você tem <span>7 dias</span> para experimentar.</h2>
+      <div class="guarantee__text reveal">
+        <p>Entre no GLOWA, explore o planner e veja se faz sentido para a sua rotina.</p>
+        <p>Se em 7 dias você achar que ele não faz sentido para você, basta enviar um pedido e nós reembolsamos 100% do valor pago.</p>
+      </div>
+      <div class="guarantee__cta reveal">
+        <a href="https://pay.cakto.com.br/3agqktb_1221057" class="btn">ENTRAR SEM RISCO →</a>
+      </div>
+    </div>
+    <div class="guarantee__stat reveal">
+      <div class="guarantee__stat-number">7</div>
+      <div class="guarantee__stat-label">Dias de garantia</div>
+      <p class="guarantee__stat-note">Experimentou e não gostou? Reembolso total.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="wrap">
+    <div class="faq__head">
+      <div class="eyebrow reveal">Perguntas frequentes</div>
+      <h2 class="section-title reveal">Tire suas <span>dúvidas</span></h2>
+    </div>
+    <div class="faq-list" id="faqList"></div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final stripes">
+  <div class="wrap">
+    <h2 class="section-title reveal">Preparada para o desafio em 21 dias?</h2>
+    <p class="lede reveal">Organize a rotina, cuide de você e comece a viver a sua melhor versão. O Planner GLOWA já está pronto.</p>
+    <div class="cta-final__cta reveal">
+      <a href="https://pay.cakto.com.br/3agqktb_1221057" class="btn">QUERO MEU PLANNER AGORA →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 GLOWA. Todos os direitos reservados.</span>
+    <nav>
+      <a href="#">Termos de Uso</a>
+      <a href="#">Política de Privacidade</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 30);
+  }, { passive: true });
+
+  const navToggle = document.getElementById('navToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const mobileMenuClose = document.getElementById('mobileMenuClose');
+
+  function openMobileMenu() {
+    mobileMenu.classList.add('is-open');
+    mobileMenu.setAttribute('aria-hidden', 'false');
+    navToggle.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMobileMenu() {
+    mobileMenu.classList.remove('is-open');
+    mobileMenu.setAttribute('aria-hidden', 'true');
+    navToggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+  navToggle.addEventListener('click', () => {
+    mobileMenu.classList.contains('is-open') ? closeMobileMenu() : openMobileMenu();
+  });
+  mobileMenuClose.addEventListener('click', closeMobileMenu);
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobileMenu));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mobileMenu.classList.contains('is-open')) closeMobileMenu();
+  });
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 900 && mobileMenu.classList.contains('is-open')) closeMobileMenu();
+  });
+
+  const faqs = [
+    {
+      q: "Vou receber algum produto na minha casa?",
+      a: "Não. Todo o conteúdo do projeto é 100% online. Assim que realizar a sua inscrição, você receberá o acesso à área de alunas no e-mail utilizado na compra."
+    },
+    {
+      q: "Por onde vou receber e como vou acessar?",
+      a: "Assim que o pagamento for aprovado, você receberá a confirmação e as instruções de acesso no e-mail preenchido no ato da compra."
+    },
+    {
+      q: "Como posso tirar dúvidas?",
+      a: "Você pode entrar em contato via e-mail ou WhatsApp. Responderemos o mais rápido possível."
+    },
+    {
+      q: "Quais são os meios de pagamento?",
+      a: "Você pode pagar via PIX, boleto ou cartão de crédito. No cartão, oferecemos a opção de parcelar em até 12x."
+    },
+    {
+      q: "Preciso saber usar Notion?",
+      a: "Não. O planner é simples e intuitivo. Você recebe orientações de como acessar e personalizar no seu ritmo."
+    },
+    {
+      q: "Consigo aplicar mesmo com a rotina corrida?",
+      a: "Sim. O GLOWA foi pensado para caber na vida real, com habit tracker, checklists e rotinas leves."
+    }
+  ];
+
+  const faqList = document.getElementById('faqList');
+  faqList.innerHTML = faqs.map((f, i) => {
+    const n = String(i + 1).padStart(2, '0');
+    return `
+    <div class="faq-item reveal">
+      <button class="faq-item__trigger" id="faqTrigger${i}" aria-expanded="false" aria-controls="faqPanel${i}">
+        <span class="faq-item__num">${n}</span>
+        <span class="faq-item__question">${f.q}</span>
+        <span class="faq-item__icon" aria-hidden="true">+</span>
+      </button>
+      <div class="faq-item__panel" id="faqPanel${i}" role="region" aria-labelledby="faqTrigger${i}">
+        <div class="faq-item__panel-inner">
+          <p class="faq-item__answer">${f.a}</p>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+
+  faqList.addEventListener('click', (e) => {
+    const trigger = e.target.closest('.faq-item__trigger');
+    if (!trigger) return;
+    const item = trigger.closest('.faq-item');
+    const isOpen = item.classList.contains('is-open');
+    faqList.querySelectorAll('.faq-item.is-open').forEach(open => {
+      open.classList.remove('is-open');
+      open.querySelector('.faq-item__trigger').setAttribute('aria-expanded', 'false');
+    });
+    if (!isOpen) {
+      item.classList.add('is-open');
+      trigger.setAttribute('aria-expanded', 'true');
+    }
+  });
+
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-visible');
+      setTimeout(() => { entry.target.style.transitionDelay = ''; }, 1300);
+      io.unobserve(entry.target);
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -20px 0px' });
+  reveals.forEach(el => {
+    const sibs = [...el.parentElement.children].filter(c => c.classList.contains('reveal'));
+    el.style.transitionDelay = Math.min(sibs.indexOf(el), 5) * 80 + 'ms';
+    io.observe(el);
+  });
+</script>
+</body>
+</html>
